@@ -1,0 +1,18 @@
+# Local-development profile.
+# Activate with: SPRING_PROFILES_ACTIVE=local
+# (e.g. ./mvnw spring-boot:run -Dspring-boot.run.profiles=local)
+#
+# This file overlays application.yml, so it inherits the application name,
+# jwt settings, and server port. It overrides only what's local-specific.
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/inventory
+    username: postgres
+    password: secret
+  jpa:
+    hibernate:
+      # Auto-create/update the schema on startup for local runs.
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
