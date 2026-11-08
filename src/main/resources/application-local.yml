@@ -4,6 +4,7 @@
 #
 # This file overlays application.yml, so it inherits the application name,
 # jwt settings, and server port. It overrides only what's local-specific.
+
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/inventory
@@ -11,8 +12,10 @@ spring:
     password: secret
   jpa:
     hibernate:
-      # Auto-create/update the schema on startup for local runs.
       ddl-auto: update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+
+jwt:
+  secret: local_dev_secret_do_not_use_in_prod
