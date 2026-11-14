@@ -1,0 +1,22 @@
+# Test profile (SPRING_PROFILES_ACTIVE=test).
+# Datasource credentials come from environment variables:
+#   DB_URL, DB_USERNAME, DB_PASSWORD
+# Example:
+#   export DB_URL="jdbc:postgresql://localhost:5432/inventory_test"
+#   export DB_USERNAME="postgres"
+#   export DB_PASSWORD="secret"
+
+spring:
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+jwt:
+  secret: ${JWT_SECRET:testSecretKeyForTestsOnly}

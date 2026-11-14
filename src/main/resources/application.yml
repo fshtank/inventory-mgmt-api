@@ -8,10 +8,16 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
   datasource:
-    url: jdbc:postgresql://localhost:5432/inventory
+    # Local defaults match the Colima container; override with env vars.
+    # application-prod.yml overrides these same keys with no-default
+    # placeholders, so a prod deploy still fails fast if an env var is missing.
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/inventory}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:secret}
 
 jwt:
-  secret: ${JWT_SECRET:defaultSecretKeyThatShouldBeChangedInProductionMustBeLongEnough}
+  # Dev default only; prod requires the JWT_SECRET env var (application-prod.yml).
+  secret: ${JWT_SECRET:local_dev_secret_do_not_use_in_prod}
   expiration: 86400000
 
 server:
